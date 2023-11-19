@@ -41,7 +41,7 @@ Message* create_msg(const char* sender, const char* receiver, const char* conten
         return NULL; // Memory allocation failed
     }
 
-    snprintf(msg->id, ID_SIZE, "MSG-%06d", id_counter++);
+    snprintf(msg->id, ID_SIZE, "MSG-%06d", id_counter++); //format and store a series of char in array buffer
     msg->id[ID_SIZE - 1] = '\0'; // Ensure null termination
     msg->time_sent = get_current_time();
     msg->sender = strdup(sender);
@@ -102,7 +102,8 @@ Message* retrieve_msg(const char* id) {
     }
 
     char line[1024];
-    while (fgets(line, sizeof(line), file)) {
+    //reads a limited number of characters from a given file stream source into an array of characters
+    while (fgets(line, sizeof(line), file)) { //
         Message* msg = malloc(sizeof(Message));
         if (!msg) {
             fclose(file);
